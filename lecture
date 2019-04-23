@@ -1,0 +1,32 @@
+Writing Gates
+มีการป้องกันอะไรบ้าง 
+
+public function boot()
+{
+    $this->registerPolicies();
+
+    Gate::define('update-post', function ($user, $post) {
+        return $user->id == $post->user_id;
+    });
+}
+
+CRUD สร้าง policy ของ post แต่ละแบบ
+
+public function boot()
+{
+    $this->registerPolicies();
+
+    Gate::define('update-post', 'App\Policies\PostPolicy@update');
+}
+
+policy return true
+
+if (Gate::forUser($user)->allows('update-post', $post)) {
+    // The user can update the post...
+}
+
+policy return false
+
+if (Gate::forUser($user)->denies('update-post', $post)) {
+    // The user can't update the post...
+}

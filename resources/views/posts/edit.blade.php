@@ -3,7 +3,12 @@
 
 <div class="container">
 
+    @if(Auth::user()->can('update'$post))
+
     <h1>Edit POST</h1>
+
+    @endif
+    
     <form action="{{ action('PostsController@update',['id' => $post->id ]) }}" method ="POST">
     @csrf
     @method('PUT')

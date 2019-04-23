@@ -5,19 +5,23 @@
 
     <h1>All Posts </h1>
 
-    <a href="{{ action('PostsController@create') }}">Create New Post
-    <hr><hr>
+    <!-- @if(Gate::allows('create-post')) --> 
+    <!-- ถ้ายังไม่ล็อกอิน Auth::user() จะเป็น null -->
+    @if(Auth::user() and Auth::user()->can('create',\App\Post::class)) 
+        <a href="{{ action('PostsController@create') }}">Create New Post
+        <hr><hr>
+    @endif
 
-    @foreach($posts as $post)
-        <div>
-        <a href="{{ action('PostsController@show',['id' => $post->id ]) }}">
-            Title: {{ $post->title }}
-            
-        </div>
-        <hr>
-    @endforeach
+        @foreach($posts as $post)
+            <div>
+            <a href="{{ action('PostsController@show',['id' => $post->id ]) }}">
+                Title: {{ $post->title }}
+                
+            </div>
+            <hr>
+        @endforeach
 
-
+   
 
 </div> 
 

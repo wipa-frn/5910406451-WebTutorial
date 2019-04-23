@@ -33,7 +33,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('create',Post::class); //มีสิทธิ์ไหม
         return view('posts.create');
     }
 
@@ -51,6 +51,8 @@ class PostsController extends Controller
         //mass assignment --> name ในฟอร์มชื่อต้องตรงกับฟิล
         //$post = Post::create($request->all));
         //return redirect()->action('PostsController@show',['id' => $post->id]);
+        
+        $this->authorize('create',Post::class); //มีสิทธิ์ไหม เข้า/post/create ไม่ได้ถ้าเป็น viewer
         
         $attributes = request()->validate([
             'title' => ['required','min:3'],
@@ -89,8 +91,11 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        
         $post = Post::findOrFail($id);
+
+        $this->authorize('update', $post);
+
         return view('posts.edit', ['post' => $post]);
     }
 
@@ -110,6 +115,9 @@ class PostsController extends Controller
         
 
         $post = Post::findOrFail($id);
+
+        $this->authorize('update', $post);
+
         $post->title = $request->input('title');
         $post->detail = $request->input('detail');
         $post->save();
@@ -125,18 +133,28 @@ class PostsController extends Controller
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
+
+        $this->authorize('delete', $post);
+
         $post->delete();
         return redirect()->action('PostsController@index');
     }
 
+    //create Gate
     public function edit_comment($post_id, $comment_id){
+
         $post = Post::findOrFail($post_id);
+
         $comment = $post->comments()->findOrFail($comment_id);
+
+        $this->authorize('update', $comment);
+
         return view('posts.edit-comment',['comment' => $comment]);
     }
 
     public function update_comment(Request $request,$post_id,$comment_id){
         $post = Post::findOrFail($post_id);
+
         $comment = $post->comments()->findOrFail($comment_id);
         $comment->detail = $request->input('detail');
         $comment->save();

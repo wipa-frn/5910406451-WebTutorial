@@ -45,5 +45,14 @@ class User extends Authenticatable
     
     public function posts(){
         return $this->hasMany('App\Post');
+    }    
+    
+    //check role who are ADMIN
+    public function isAdmin(){
+        return $this->role === ('ADMINISTRATOR');
+    }
+
+    public function isCreator(){
+        return $this->role === ('CREATOR');
     }
 }

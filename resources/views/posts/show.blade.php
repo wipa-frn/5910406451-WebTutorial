@@ -6,13 +6,15 @@
       
 </div>
 <hr>
+@if(Auth::user() and Auth::user()->can('create',$post)) 
 <div>
     
     <a href="{{ action('PostsController@edit',['id' => $post->id ]) }}">Edit this post</a>
 
 </div>
+@endif
 
-
+@if(Auth::user() and Auth::user()->can('delete',$post)) 
 <!--comments section-->
 <section class="comments">
 
@@ -28,5 +30,7 @@
     </div>
 
 </section>
+@endif
+
 <!--end comments section-->
 @endsection
