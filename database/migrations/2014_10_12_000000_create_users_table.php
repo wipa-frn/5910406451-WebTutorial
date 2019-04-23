@@ -16,11 +16,13 @@ class CreateUsersTable extends Migration //file name = class name
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->enum('role', [ 'ADMINISTRATOR', 'CREATOR' ,'VIEWER'])->default('VIEWER');
             $table->string('email')->unique(); //must b unique
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken(); //create at
             $table->timestamps(); //update at
+            $table->softDeletes();
         });
     }
 

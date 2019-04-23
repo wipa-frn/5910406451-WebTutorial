@@ -18,14 +18,14 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers;  //จะแก้ไขให้โอเวอร์ไรด์ ห้ามแก้ในเวนเดอร์
 
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/home'; //ล็อกอินสำเร็จไปหน้าไหน
 
     /**
      * Create a new controller instance.
@@ -34,6 +34,11 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('logout'); //ล็อกเอ้าต้องไม่ใช่คนที่ล็อกอิน
     }
+
+    // public function username(){
+    //     return 'username';
+    // }
+
 }

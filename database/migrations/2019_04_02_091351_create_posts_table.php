@@ -17,8 +17,10 @@ class CreatePostsTable extends Migration
             $table->bigIncrements('id'); //big int increment (pri key)
             $table->string('title',255);
             $table->text('detail');
-
+            $table->unsignedBigInteger('user_id');
             $table->timestamps(); //stamp time when update
+            
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

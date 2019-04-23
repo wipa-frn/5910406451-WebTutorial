@@ -26,6 +26,26 @@ $factory->define(User::class, function (Faker $faker) {
     ];
 });
 
+$factory->state(App\User::class, 'admin', function ($faker) {
+    return [
+        'role' => 'ADMINISTRATOR',
+        'name' => 'ADMINISTRATOR',
+        'password' => Hash::make('PasswordForAdmin')
+    ];
+});
+
+$factory->state(App\User::class, 'creator', function ($faker) {
+    return [
+        'role' => 'CREATOR',
+    ];
+});
+
+$factory->state(App\User::class, 'viewer', function ($faker) {
+    return [
+        'role' => 'VIEWER',
+    ];
+});
+
 //faker = ผู้หลอก
 //กำหนดว่าเป็นค่าของคลาสอะไร
 

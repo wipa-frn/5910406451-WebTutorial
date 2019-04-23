@@ -7,6 +7,13 @@ use App\Post;
 
 class PostsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index'.'show']); //auth= บังคับว่า controller page นี้ ต้อง login ก่อนถึงเข้ามาได้ ยกเว้นหน้า index
+    }
+
+
     /**
      * Display a listing of the resource. ----resource of Model post
      *

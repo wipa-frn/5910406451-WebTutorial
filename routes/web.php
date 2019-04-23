@@ -107,3 +107,8 @@ Route::get('/master',function(){
 
 });
 
+// Authentacation  php artisan make:auth
+// Auth::routes();
+Auth::routes(['register' => false]); //get out!! register
+
+Route::get('/home', 'HomeController@index')->name('home');
