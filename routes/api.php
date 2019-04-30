@@ -16,3 +16,12 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Route::get('/',function (){ //send เป็น json
+//     return response()->json([
+//         'key' => 'value',
+//         'message' => 'Hello API'
+//     ]);
+// });
+
+Route::resource('/users','Api\UsersController'); //จะได้ไม่ต้อง verify cserf token
