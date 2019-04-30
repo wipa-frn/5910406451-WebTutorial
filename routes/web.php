@@ -21,7 +21,7 @@ Route::put('/posts/{post_id}/comments/{comment_id}','PostsController@update_comm
 Route::resource('/posts','PostsController'); //สร้าง route get post up de กับ 7 เมธอด
 
 
-
+Route::resource('/users','UsersController');
 
 
 
