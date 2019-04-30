@@ -7,8 +7,10 @@
         <button v-on:click="toggleTitle">Toggle</button>
 
 
-        <example-component></example-component>
-        <user-info user-id="1"></user-info>
+        <example-component></example-component><hr>
+        <user-info user-id="1"></user-info><hr>
+        <user-info user-id="2"></user-info><hr>
+        <user-info user-id="3"></user-info><hr>
         <!-- kabub case -->
 
         </div>
